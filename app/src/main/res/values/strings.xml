@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MoedaUsabilidade</string>
+    <string name="escolha_moeda_desc">Escolha as moedas para conversão</string>
+    <string name="de_label">De</string>
+    <string name="para_field">Para</string>
+    <string name="proximo_label">próximo</string>
 </resources>
