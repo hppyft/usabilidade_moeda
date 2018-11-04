@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data></data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--<com.google.android.cameraview.CameraView-->
+        <!--android:id="@+id/camera"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:keepScreenOn="true"-->
+        <!--android:adjustViewBounds="true"-->
+        <!--app:autoFocus="true"-->
+        <!--app:aspectRatio="4:3"-->
+        <!--app:facing="back"-->
+        <!--app:flash="auto"/>-->
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/de_edit_field"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/para_edit_field"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginStart="20dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/arrow_right"
+            app:layout_constraintBottom_toBottomOf="@id/de_edit_field"
+            app:layout_constraintLeft_toLeftOf="@id/para_edit_field"
+            app:layout_constraintRight_toRightOf="@id/de_edit_field"
+            app:layout_constraintTop_toTopOf="@id/de_edit_field" />
+
+        <TextView
+            android:id="@+id/de_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dólar"
+            app:layout_constraintBottom_toTopOf="@id/de_edit_field"
+            app:layout_constraintLeft_toLeftOf="@id/de_edit_field" />
+
+        <TextView
+            android:id="@+id/para_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Real"
+            app:layout_constraintBottom_toTopOf="@id/para_edit_field"
+            app:layout_constraintLeft_toLeftOf="@id/para_edit_field" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/foto_preco_supermercado"
+            app:layout_constraintBottom_toTopOf="@id/de_label"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

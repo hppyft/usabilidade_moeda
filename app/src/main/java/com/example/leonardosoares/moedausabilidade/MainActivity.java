@@ -1,6 +1,7 @@
 package com.example.leonardosoares.moedausabilidade;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -38,9 +39,7 @@ public class MainActivity extends AppCompatActivity {
         editor.putInt(MOEDA_DE, mBinding.moedaDeSpinner.getSelectedItemPosition());
         editor.putInt(MOEDA_PARA, mBinding.moedaParaSpinner.getSelectedItemPosition());
         editor.commit();
-
-        //TODO criar nova atividade com a camera e as trocas de preco
-
-        System.out.println(" -> FOI, EH NOIX");
+        Intent intent = new Intent(this, ConversaoActivity.class);
+        startActivity(intent);
     }
 }
