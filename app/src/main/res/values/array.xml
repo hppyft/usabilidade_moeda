@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="moedas_array">
-        <item>Real</item>
-        <item>Dólar</item>
-        <item>Euro</item>
-        <item>Peso Argentino</item>
+        <item>@string/real</item>
+        <item>@string/dolar</item>
+        <item>@string/euro</item>
+        <item>@string/peso</item>
     </string-array>
 </resources>

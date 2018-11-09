@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,8 +15,8 @@ import com.example.leonardosoares.moedausabilidade.databinding.ActivityMainBindi
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding mBinding;
-    public String MOEDA_DE = "MOEDA_DE";
-    public String MOEDA_PARA = "MOEDA_PARA";
+    public static final String MOEDA_DE = "MOEDA_DE";
+    public static final String MOEDA_PARA = "MOEDA_PARA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void proximoClicked(View view) {
-        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(MOEDA_DE, mBinding.moedaDeSpinner.getSelectedItemPosition());
         editor.putInt(MOEDA_PARA, mBinding.moedaParaSpinner.getSelectedItemPosition());
