@@ -2,6 +2,7 @@ package com.example.leonardosoares.moedausabilidade;
 
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,9 @@ import android.text.TextWatcher;
 import com.example.leonardosoares.moedausabilidade.databinding.ActivityConversaoBinding;
 
 public class ConversaoActivity extends AppCompatActivity {
+
+    public Camera mCamera;
+    public Preview mPreview;
 
     public static final int REAL = 0;
     public static final int DOLAR = 1;
@@ -111,6 +115,7 @@ public class ConversaoActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-//        mBinding.camera.start();
+        mBinding.preview.setCamera(Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK));
     }
+
 }
