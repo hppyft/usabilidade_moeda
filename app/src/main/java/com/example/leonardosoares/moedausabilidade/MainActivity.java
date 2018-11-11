@@ -1,11 +1,15 @@
 package com.example.leonardosoares.moedausabilidade;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -34,12 +38,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(mBinding.getRoot());
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.CAMERA}, 50);
+            }
+        }
+    }
+
     public void proximoClicked(View view) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(MOEDA_DE, mBinding.moedaDeSpinner.getSelectedItemPosition());
         editor.putInt(MOEDA_PARA, mBinding.moedaParaSpinner.getSelectedItemPosition());
-        editor.commit();
+        editor.apply();
         Intent intent = new Intent(this, ConversaoActivity.class);
         startActivity(intent);
     }

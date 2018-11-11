@@ -8,13 +8,15 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Surface;
 
 import com.example.leonardosoares.moedausabilidade.databinding.ActivityConversaoBinding;
+
+import static android.hardware.Camera.*;
 
 public class ConversaoActivity extends AppCompatActivity {
 
     public Camera mCamera;
-    public Preview mPreview;
 
     public static final int REAL = 0;
     public static final int DOLAR = 1;
@@ -26,9 +28,28 @@ public class ConversaoActivity extends AppCompatActivity {
 
     ActivityConversaoBinding mBinding;
 
+    int numberOfCameras;
+    int cameraCurrentlyLocked;
+
+    // The first rear facing camera
+    int defaultCameraId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Find the total number of cameras available
+        numberOfCameras = getNumberOfCameras();
+
+        // Find the ID of the default camera
+        CameraInfo cameraInfo = new CameraInfo();
+        for (int i = 0; i < numberOfCameras; i++) {
+            getCameraInfo(i, cameraInfo);
+            if (cameraInfo.facing == CameraInfo.CAMERA_FACING_BACK) {
+                defaultCameraId = i;
+            }
+        }
+
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_conversao);
         mBinding.deEditField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -115,7 +136,50 @@ public class ConversaoActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mBinding.preview.setCamera(Camera.open(Camera.CameraInfo.CAMERA_FACING_BACK));
+
+        // Open the default i.e. the first rear facing camera.
+        try {
+            mCamera = open();
+
+            CameraInfo info =
+                    new CameraInfo();
+            getCameraInfo(defaultCameraId, info);
+            int rotation = this.getWindowManager().getDefaultDisplay()
+                    .getRotation();
+            int degrees = 0;
+            switch (rotation) {
+                case Surface.ROTATION_0: degrees = 0; break;
+                case Surface.ROTATION_90: degrees = 90; break;
+                case Surface.ROTATION_180: degrees = 180; break;
+                case Surface.ROTATION_270: degrees = 270; break;
+            }
+
+            int result;
+            if (info.facing == CameraInfo.CAMERA_FACING_FRONT) {
+                result = (info.orientation + degrees) % 360;
+                result = (360 - result) % 360;  // compensate the mirror
+            } else {  // back-facing
+                result = (info.orientation - degrees + 360) % 360;
+            }
+
+            mCamera.setDisplayOrientation(result);
+            cameraCurrentlyLocked = defaultCameraId;
+            mBinding.preview.setCamera(mCamera);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // Because the Camera object is a shared resource, it's very
+        // important to release it when the activity is paused.
+        if (mCamera != null) {
+            mBinding.preview.setCamera(null);
+            mCamera.release();
+            mCamera = null;
+        }
+    }
 }

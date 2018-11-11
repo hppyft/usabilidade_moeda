@@ -11,10 +11,11 @@
 
         <com.example.leonardosoares.moedausabilidade.Preview
             android:id="@+id/preview"
-            android:layout_width="500dp"
-            android:layout_height="500dp">
-
-        </com.example.leonardosoares.moedausabilidade.Preview>
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/de_edit_field"
@@ -65,16 +66,5 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@id/para_edit_field"
             app:layout_constraintLeft_toLeftOf="@id/para_edit_field" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/foto_preco_supermercado"
-            app:layout_constraintBottom_toTopOf="@id/de_label"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </layout>
